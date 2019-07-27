@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(LineRenderer))]
 public class circileProject : MonoBehaviour
 {
     [Range(0, 100)]
