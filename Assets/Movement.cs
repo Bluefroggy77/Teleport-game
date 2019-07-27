@@ -6,6 +6,7 @@ public class Movement : MonoBehaviour
     public float speed;
     public float jumpForce;
     public float gravity;
+    public bool canJump;
 
     void Start()
     {
@@ -13,9 +14,26 @@ public class Movement : MonoBehaviour
     }
 
     void Update()
-    {
+    {       
+        RaycastHit hit;
+        if(Physics.Raycast(transform.position, Vector3.down, out hit, 1))
+        {
+            if (hit.collider.tag == "Solid")
+            {
+                canJump = true;
+            }
+            else
+            {
+                canJump = false;
+            }
+        }
+        else
+        {
+            canJump = false;
+        }      
+
         rb.AddForce(new Vector3(0, gravity, 0));
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && canJump == true)
         {
             rb.AddForce(new Vector3(0, jumpForce, 0));
         }
