@@ -60,5 +60,5 @@ public class Movement : MonoBehaviour
         {
             rb.velocity = new Vector3(-speed, rb.velocity.y, 0);
         }
-    }
+    }   
 }

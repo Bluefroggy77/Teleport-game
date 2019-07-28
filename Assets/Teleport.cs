@@ -31,19 +31,34 @@ public class Teleport : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
-                if (hit.collider.tag != "Solid")
+                if (hit.collider.tag != "Solid" && hit.collider.tag != "Bad" && hit.collider.tag != "NoTell")
                 {
-                    if (Vector3.Distance(transform.position, new Vector3(hit.point.x, hit.point.y, 0)) < range)
-                    {
-                        if (delayt <= Time.time)
+                    RaycastHit hitt;
+                    if (Physics.Raycast(transform.position, Vector3.down, out hitt, 1))
+                    {                     
+                        if (hitt.collider.tag != "NoTell")
                         {
-                            transform.position = new Vector3(hit.point.x, hit.point.y, 0);
-                            part.Play(false);
-                            delayt = Time.time + delay;
+                            Tell();
                         }
                     }
-                }
+                    else
+                    {
+                        Tell();
+                    }
+                }                
             }
         }        
+    }
+    void Tell()
+    {
+        if (Vector3.Distance(transform.position, new Vector3(hit.point.x, hit.point.y, 0)) < range)
+        {
+            if (delayt <= Time.time)
+            {
+                transform.position = new Vector3(hit.point.x, hit.point.y, 0);
+                part.Play(false);
+                delayt = Time.time + delay;               
+            }
+        }
     }
 }

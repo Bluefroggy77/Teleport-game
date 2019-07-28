@@ -25,7 +25,6 @@ public class circileProject : MonoBehaviour
     {
         float x;
         float y;
-        float z;
 
         float angle = 20f;
 
